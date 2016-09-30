@@ -1,0 +1,13 @@
+RemoteSystemsTempFiles/
+.metadata/
+/target/
+*/target
+.classpath
+.project
+.settings/
+*/.gitignore
+.DS_Store
+*/pom.xml.versionsBackup
+workspace
+.tern-project
+.idea
