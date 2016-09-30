@@ -4,6 +4,7 @@
 
 + Eclipse Mars.2
 + MySQL 5.7.15
++ WildFly 9.0.1.Final
 
 ### Testing Environment Settings
 
