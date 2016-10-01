@@ -2,7 +2,9 @@ package com.chomica.karatube.dao;
 
 import java.util.List;
 
-public interface IBaseJpaDAO<T> {
+import com.chomica.karatube.model.entity.IEntity;
+
+public interface IBaseJpaDAO<T extends IEntity> {
    // ---------------------------------------------------------------
    public List<T> findAll();
    public T findById(Object id);

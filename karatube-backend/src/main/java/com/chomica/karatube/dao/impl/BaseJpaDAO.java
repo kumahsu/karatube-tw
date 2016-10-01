@@ -1,6 +1,5 @@
 package com.chomica.karatube.dao.impl;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,8 +9,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.chomica.karatube.dao.IBaseJpaDAO;
+import com.chomica.karatube.model.entity.IEntity;
 
-public class BaseJpaDAO<T extends Serializable> implements IBaseJpaDAO<T> {
+public class BaseJpaDAO<T extends IEntity> implements IBaseJpaDAO<T> {
    // ---------------------------------------------------------------
    @Autowired
    protected EntityManager em;
