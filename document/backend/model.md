@@ -14,3 +14,4 @@
 	+ id (string, required) - UUID
 	+ name (string, required) - Singer name
 	+ type ([Singer Type](#singer-type), required) - Singer type
+	+ keywords (string, required) - Keywords for search singer
