@@ -17,4 +17,10 @@ public class CreateSingerResp extends HttpResponse {
    public SingerDetail getData() {
       return this.data;
    }
+
+   // ---------------------------------------------------------------
+   @Override
+   protected HttpResponse instance() {
+      return this;
+   }
 }

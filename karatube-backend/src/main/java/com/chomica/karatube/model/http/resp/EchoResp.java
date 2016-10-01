@@ -16,4 +16,10 @@ public class EchoResp extends HttpResponse {
    public String getData() {
       return this.data;
    }
+
+   // ---------------------------------------------------------------
+   @Override
+   protected HttpResponse instance() {
+      return this;
+   }
 }
