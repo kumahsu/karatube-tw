@@ -7,6 +7,7 @@
 	+ [Echo Service](common.md#echo-service-post-echo)
 + [Singer Service](singer.md)
 	+ [Create Singer](singer.md#create-singer-post-create)
+	+ [Update Singer](singer.md#update-singer-put-update)
 + [Song Service](song.md)
 + [Models](model.md)
 + [Status Code](status.md)
