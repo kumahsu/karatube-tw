@@ -40,7 +40,7 @@ public class Song implements IEntity {
    private String tubeId;
    
    @Column(name = "confirmed", nullable = false)
-   private Boolean confirmed;
+   private int confirmed;
    
    // ---------------------------------------------------------------
    @Column(name = "create_time", nullable = false)
@@ -51,7 +51,7 @@ public class Song implements IEntity {
    
    // ---------------------------------------------------------------
    public Song() { }
-   public Song(String id, String name, int category, Singer singer, String tubeId, Boolean confirmed, Long createTime, Long lastUpdateTime) {
+   public Song(String id, String name, int category, Singer singer, String tubeId, int confirmed, Long createTime, Long lastUpdateTime) {
       this.id = id;
       this.name = name;
       this.category = category;
@@ -78,7 +78,7 @@ public class Song implements IEntity {
    public void setTubeId(String tubeId) {
       this.tubeId = tubeId;
    }
-   public void setConfirmed(Boolean confirmed) {
+   public void setConfirmed(int confirmed) {
       this.confirmed = confirmed;
    }
    public void setCreateTime(Long createTime) {
@@ -104,7 +104,7 @@ public class Song implements IEntity {
    public String getTubeId() {
       return tubeId;
    }
-   public Boolean getConfirmed() {
+   public int getConfirmed() {
       return confirmed;
    }
    public Long getCreateTime() {

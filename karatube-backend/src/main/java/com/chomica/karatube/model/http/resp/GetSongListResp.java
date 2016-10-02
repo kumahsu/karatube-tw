@@ -1,22 +1,24 @@
 package com.chomica.karatube.model.http.resp;
 
 import com.chomica.karatube.constant.StatusCode;
+import com.chomica.karatube.model.http.SongDetail;
+import com.chomica.karatube.model.http.resp.data.QueryListData;
 
-public class EchoResp extends HttpResponse {
+public class GetSongListResp extends HttpResponse {
    // ---------------------------------------------------------------
-   private String data;
+   private QueryListData<SongDetail> data;
    
    // ---------------------------------------------------------------
-   public EchoResp(String data) {
+   public GetSongListResp(QueryListData<SongDetail> data) {
       super(StatusCode.SUCCESS);
       this.data = data;
    }
    
    // ---------------------------------------------------------------
-   public String getData() {
+   public QueryListData<SongDetail> getData() {
       return this.data;
    }
-
+   
    // ---------------------------------------------------------------
    @Override
    protected HttpResponse instance() {

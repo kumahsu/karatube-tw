@@ -11,6 +11,7 @@ public enum StatusCode {
    INVALID_CONTENT_TYPE(40021, "Invalid or missing Content-Type header"),
    
    // ----- 500 Internal Server Error
+   TYPE_NOT_FOUND(500400, "Type not found"),
    UNKNOWN_ERROR(500999, "Unknown error occurred")
    ;
    

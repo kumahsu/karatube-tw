@@ -7,4 +7,10 @@ public class ErrorResp extends HttpResponse {
    public ErrorResp(StatusCode status) {
       super(status);
    }
+
+   // ---------------------------------------------------------------
+   @Override
+   protected HttpResponse instance() {
+      return this;
+   }
 }
