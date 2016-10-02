@@ -1,5 +1,7 @@
 package com.chomica.karatube.constant;
 
+import com.chomica.karatube.exception.TypeNotFoundException;
+
 public enum SongCategory {
    // ---------------------------------------------------------------
    OTHER(0),
@@ -26,12 +28,12 @@ public enum SongCategory {
    }
    
    // ---------------------------------------------------------------
-   public static SongCategory getCategory(int code) {
+   public static SongCategory getCategory(int code) throws TypeNotFoundException {
       for(SongCategory category : SongCategory.values()) {
          if(category.code == code) {
             return category;
          }
       }
-      return null;
+      throw new TypeNotFoundException("SongCategory", code);
    }
 }

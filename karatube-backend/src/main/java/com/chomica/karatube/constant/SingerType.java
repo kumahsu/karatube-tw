@@ -1,5 +1,7 @@
 package com.chomica.karatube.constant;
 
+import com.chomica.karatube.exception.TypeNotFoundException;
+
 public enum SingerType {
    // ---------------------------------------------------------------
    UNDEFINE(0),
@@ -22,12 +24,12 @@ public enum SingerType {
    }
    
    // ---------------------------------------------------------------
-   public static SingerType getType(int code) {
+   public static SingerType getType(int code) throws TypeNotFoundException {
       for(SingerType type : SingerType.values()) {
          if(type.code == code) {
             return type;
          }
       }
-      return null;
+      throw new TypeNotFoundException("SingerType", code);
    }
 }
