@@ -17,6 +17,7 @@ import com.chomica.karatube.model.http.resp.CreateSingerResp;
 import com.chomica.karatube.model.http.resp.DeleteSingerResp;
 import com.chomica.karatube.model.http.resp.GetSingerDetailResp;
 import com.chomica.karatube.model.http.resp.GetSingerListResp;
+import com.chomica.karatube.model.http.resp.GetSongListResp;
 import com.chomica.karatube.model.http.resp.UpdateSingerResp;
 
 @Controller
@@ -72,6 +73,15 @@ public class SingerController {
                                                         @RequestParam("keyword") String keyword)
    {
       logger.debug("Receive get singer list request from {} get {}, type={}, keyword={}", index, size, type, keyword);
+      return null;
+   }
+   
+   // ---------------------------------------------------------------
+   @RequestMapping(value = "/{singer_id}/songs",
+                   method = RequestMethod.GET,
+                   produces = MediaType.APPLICATION_JSON_VALUE)
+   public @ResponseBody GetSongListResp getSongsBySinger(@PathVariable("singer_id") String singer_id) {
+      logger.debug("Receive get songs by singer {} request", singer_id);
       return null;
    }
 }
