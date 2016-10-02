@@ -7,4 +7,10 @@ public class HealthCheckResp extends HttpResponse {
    public HealthCheckResp() {
       super(StatusCode.SUCCESS);
    }
+
+   // ---------------------------------------------------------------
+   @Override
+   protected HttpResponse instance() {
+      return this;
+   }
 }

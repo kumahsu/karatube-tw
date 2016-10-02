@@ -1,8 +1,6 @@
 package com.chomica.karatube.model.http.req;
 
-import com.chomica.karatube.util.JsonUtil;
-
-public class EchoReq {
+public class EchoReq extends HttpRequest {
    // ---------------------------------------------------------------
    private String message;
    
@@ -24,7 +22,7 @@ public class EchoReq {
    
    // ---------------------------------------------------------------
    @Override
-   public String toString() {
-      return JsonUtil.writeObjectToJson(this);
+   protected HttpRequest instance() {
+      return this;
    }
 }
