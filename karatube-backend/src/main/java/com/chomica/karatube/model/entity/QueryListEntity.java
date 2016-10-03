@@ -1,26 +1,24 @@
-package com.chomica.karatube.model.http.resp.data;
+package com.chomica.karatube.model.entity;
 
 import java.util.List;
 
-import com.chomica.karatube.model.http.IHttpModel;
 import com.chomica.karatube.util.JsonUtil;
 
-public class QueryListData<T extends IHttpModel> {
+public class QueryListEntity<T extends IEntity> {
    // ---------------------------------------------------------------
    private int size;
    private int totalCount;
-   private int startIndex;
+   private int start;
    private List<T> list;
    
    // ---------------------------------------------------------------
-   public QueryListData() { }
-   public QueryListData(int size, int totalCount, int startIndex, List<T> list) {
+   public QueryListEntity(int size, int totalCount, int start, List<T> list) {
       this.size = size;
       this.totalCount = totalCount;
-      this.startIndex = startIndex;
+      this.start = start;
       this.list = list;
    }
-   
+
    // ---------------------------------------------------------------
    public int getSize() {
       return size;
@@ -28,8 +26,8 @@ public class QueryListData<T extends IHttpModel> {
    public int getTotalCount() {
       return totalCount;
    }
-   public int getStartIndex() {
-      return startIndex;
+   public int getStart() {
+      return start;
    }
    public List<T> getList() {
       return list;
