@@ -1,20 +1,14 @@
 package com.chomica.karatube.model.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.chomica.karatube.util.JsonUtil;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "singer")
@@ -37,10 +31,6 @@ public class SingerEntity implements IEntity {
    
    @Column(name = "keywords", nullable = true)
    private String keywords;
-   
-   @JsonIgnore
-   @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="singer")
-   private List<SongEntity> songs;
 
    // ---------------------------------------------------------------
    @Column(name = "create_time", nullable = false)
@@ -51,12 +41,11 @@ public class SingerEntity implements IEntity {
    
    // ---------------------------------------------------------------
    public SingerEntity() { }
-   public SingerEntity(String id, String name, int type, String keywords, List<SongEntity> songs, Long createTime, Long lastUpdateTime) {
+   public SingerEntity(String id, String name, int type, String keywords, Long createTime, Long lastUpdateTime) {
       this.id = id;
       this.name = name;
       this.type = type;
       this.keywords = keywords;
-      this.songs = songs;
       this.createTime = createTime;
       this.lastUpdateTime = lastUpdateTime;
    }
@@ -73,9 +62,6 @@ public class SingerEntity implements IEntity {
    }
    public void setKeywords(String keywords) {
       this.keywords = keywords;
-   }
-   public void setSongs(List<SongEntity> songs) {
-      this.songs = songs;
    }
    public void setCreateTime(Long createTime) {
       this.createTime = createTime;
@@ -96,9 +82,6 @@ public class SingerEntity implements IEntity {
    }
    public String getKeywords() {
       return keywords;
-   }
-   public List<SongEntity> getSongs() {
-      return songs;
    }
    public Long getCreateTime() {
       return createTime;
