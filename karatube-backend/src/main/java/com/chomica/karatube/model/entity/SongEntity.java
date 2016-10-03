@@ -1,62 +1,63 @@
 package com.chomica.karatube.model.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.chomica.karatube.util.JsonUtil;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "singer")
-public class Singer implements IEntity {
+@Table(name = "song")
+public class SongEntity implements IEntity {
    // ---------------------------------------------------------------
-   private static final long serialVersionUID = 702721159397293077L;
+   private static final long serialVersionUID = -5959747587393149699L;
 
    // ---------------------------------------------------------------
    @Id
    @GeneratedValue(generator = "uuid")
    @GenericGenerator(name = "uuid", strategy = "uuid2")
-   @Column(name = "singer_id", unique = true, nullable = false)
+   @Column(name = "song_id", unique = true, nullable = false)
    private String id;
    
-   @Column(name = "singer_name", nullable = false)
+   @Column(name = "song_name", nullable = false)
    private String name;
    
-   @Column(name = "singer_type")
-   private int type;
+   @Column(name = "song_category")
+   private int category;
    
-   @Column(name = "keywords", nullable = true)
-   private String keywords;
-   
-   @JsonIgnore
-   @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="singer")
-   private List<Song> songs;
+   @ManyToOne
+   @JoinColumn(name="singer_id")
+   private SingerEntity singer;
 
+   // ---------------------------------------------------------------
+   @Column(name = "tube_id", nullable = false)
+   private String tubeId;
+   
+   @Column(name = "confirmed", nullable = false)
+   private int confirmed;
+   
    // ---------------------------------------------------------------
    @Column(name = "create_time", nullable = false)
    private Long createTime;
    
-   @Column(name = "last_update_time", nullable = true)
+   @Column(name = "last_update_time")
    private Long lastUpdateTime;
    
    // ---------------------------------------------------------------
-   public Singer() { }
-   public Singer(String id, String name, int type, String keywords, List<Song> songs, Long createTime, Long lastUpdateTime) {
+   public SongEntity() { }
+   public SongEntity(String id, String name, int category, SingerEntity singer, String tubeId, int confirmed, Long createTime, Long lastUpdateTime) {
       this.id = id;
       this.name = name;
-      this.type = type;
-      this.keywords = keywords;
-      this.songs = songs;
+      this.category = category;
+      this.singer = singer;
+      this.tubeId = tubeId;
+      this.confirmed = confirmed;
       this.createTime = createTime;
       this.lastUpdateTime = lastUpdateTime;
    }
@@ -68,14 +69,17 @@ public class Singer implements IEntity {
    public void setName(String name) {
       this.name = name;
    }
-   public void setType(int type) {
-      this.type = type;
+   public void setCategory(int category) {
+      this.category = category;
    }
-   public void setKeywords(String keywords) {
-      this.keywords = keywords;
+   public void setSinger(SingerEntity singer) {
+      this.singer = singer;
    }
-   public void setSongs(List<Song> songs) {
-      this.songs = songs;
+   public void setTubeId(String tubeId) {
+      this.tubeId = tubeId;
+   }
+   public void setConfirmed(int confirmed) {
+      this.confirmed = confirmed;
    }
    public void setCreateTime(Long createTime) {
       this.createTime = createTime;
@@ -91,14 +95,17 @@ public class Singer implements IEntity {
    public String getName() {
       return name;
    }
-   public int getType() {
-      return type;
+   public int getCategory() {
+      return category;
    }
-   public String getKeywords() {
-      return keywords;
+   public SingerEntity getSinger() {
+      return singer;
    }
-   public List<Song> getSongs() {
-      return songs;
+   public String getTubeId() {
+      return tubeId;
+   }
+   public int getConfirmed() {
+      return confirmed;
    }
    public Long getCreateTime() {
       return createTime;
