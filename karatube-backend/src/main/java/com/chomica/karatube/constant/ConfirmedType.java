@@ -1,5 +1,7 @@
 package com.chomica.karatube.constant;
 
+import com.chomica.karatube.exception.TypeNotFoundException;
+
 public enum ConfirmedType {
    // ---------------------------------------------------------------
    NEW(0),
@@ -21,12 +23,12 @@ public enum ConfirmedType {
    }
    
    // ---------------------------------------------------------------
-   public static ConfirmedType getType(int code) {
+   public static ConfirmedType getType(int code) throws TypeNotFoundException {
       for(ConfirmedType type : ConfirmedType.values()) {
          if(type.code == code) {
             return type;
          }
       }
-      return null;
+      throw new TypeNotFoundException("ConfirmedType", code);
    }
 }
