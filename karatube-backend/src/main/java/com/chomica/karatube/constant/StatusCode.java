@@ -12,6 +12,8 @@ public enum StatusCode {
    
    // ----- 500 Internal Server Error
    TYPE_NOT_FOUND(500400, "Type not found"),
+   DB_CONNECTION_ERROR(500501, "DB connection erro"),
+   SYSTEM_RUNTIME_ERROR(500998, "System Runtime error, usually code bug"),
    UNKNOWN_ERROR(500999, "Unknown error occurred")
    ;
    
