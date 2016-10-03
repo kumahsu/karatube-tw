@@ -1,23 +1,23 @@
 package com.chomica.karatube.model.http.req;
 
-public class EchoReq extends HttpRequest {
+public class ConfirmedSongReq extends HttpRequest {
    // ---------------------------------------------------------------
-   private String message;
+   private int type;
    
    // ---------------------------------------------------------------
-   public EchoReq() { }
-   public EchoReq(String message) {
-      this.message = message;
+   public ConfirmedSongReq() { }
+   public ConfirmedSongReq(int type) {
+      this.type = type;
    }
    
    // ---------------------------------------------------------------
-   public void setMessage(String message) {
-      this.message = message;
+   public void setType(int type) {
+      this.type = type;
    }
    
    // ---------------------------------------------------------------
-   public String getMessage() {
-      return this.message;
+   public int getType() {
+      return this.type;
    }
    
    // ---------------------------------------------------------------
@@ -25,4 +25,5 @@ public class EchoReq extends HttpRequest {
    protected HttpRequest instance() {
       return this;
    }
+
 }

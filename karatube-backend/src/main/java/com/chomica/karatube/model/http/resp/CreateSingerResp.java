@@ -1,19 +1,20 @@
 package com.chomica.karatube.model.http.resp;
 
 import com.chomica.karatube.constant.StatusCode;
+import com.chomica.karatube.model.http.SingerDetail;
 
-public class EchoResp extends HttpResponse {
+public class CreateSingerResp extends HttpResponse {
    // ---------------------------------------------------------------
-   private String data;
+   private SingerDetail data;
    
    // ---------------------------------------------------------------
-   public EchoResp(String data) {
+   public CreateSingerResp(SingerDetail data) {
       super(StatusCode.SUCCESS);
       this.data = data;
    }
    
    // ---------------------------------------------------------------
-   public String getData() {
+   public SingerDetail getData() {
       return this.data;
    }
 

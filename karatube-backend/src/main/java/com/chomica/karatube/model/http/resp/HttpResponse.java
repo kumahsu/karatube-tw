@@ -26,8 +26,11 @@ public abstract class HttpResponse {
    }
    
    // ---------------------------------------------------------------
+   protected abstract HttpResponse instance();
+   
+   // ---------------------------------------------------------------
    @Override
    public String toString() {
-      return JsonUtil.writeObjectToJson(this);
+      return JsonUtil.writeObjectToJson(this.instance());
    }
 }
