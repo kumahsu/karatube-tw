@@ -1,8 +1,8 @@
 package com.chomica.karatube.model.http.resp;
 
 import com.chomica.karatube.constant.StatusCode;
+import com.chomica.karatube.model.QueryListData;
 import com.chomica.karatube.model.http.SingerDetail;
-import com.chomica.karatube.model.http.resp.data.QueryListData;
 
 public class GetSingerListResp extends HttpResponse {
    // ---------------------------------------------------------------

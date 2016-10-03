@@ -1,7 +1,12 @@
 package com.chomica.karatube.controller;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.chomica.karatube.model.QueryListData;
+import com.chomica.karatube.model.http.SingerDetail;
 import com.chomica.karatube.model.http.req.CreateSingerReq;
 import com.chomica.karatube.model.http.req.UpdateSingerReq;
 import com.chomica.karatube.model.http.resp.CreateSingerResp;
@@ -19,6 +26,8 @@ import com.chomica.karatube.model.http.resp.GetSingerDetailResp;
 import com.chomica.karatube.model.http.resp.GetSingerListResp;
 import com.chomica.karatube.model.http.resp.GetSongListResp;
 import com.chomica.karatube.model.http.resp.UpdateSingerResp;
+import com.chomica.karatube.model.vo.SingerVO;
+import com.chomica.karatube.service.ISingerService;
 
 @Controller
 @RequestMapping(value = "/singer")
@@ -27,13 +36,21 @@ public class SingerController {
    private static final Logger logger = LoggerFactory.getLogger(SingerController.class);
    
    // ---------------------------------------------------------------
+   @Autowired
+   @Qualifier("singerService")
+   private ISingerService singerService;
+   
+   // ---------------------------------------------------------------
    @RequestMapping(value = "", 
                    method = RequestMethod.POST, 
                    consumes = MediaType.APPLICATION_JSON_VALUE, 
                    produces = MediaType.APPLICATION_JSON_VALUE)
    public @ResponseBody CreateSingerResp createSinger(@RequestBody CreateSingerReq req) {
       logger.debug("Receive create singer request: {}", req);
-      return null;
+      SingerDetail detail = new SingerDetail(null, req.getName(), req.getType(), req.getKeywords());
+      SingerVO singer = new SingerVO(detail);
+      singer = this.singerService.createSinger(singer);
+      return new CreateSingerResp(singer.adaptor().toHttpModel());
    }
    
    @RequestMapping(value = "/{singer_id}",
@@ -44,7 +61,11 @@ public class SingerController {
                                                       @RequestBody UpdateSingerReq req)
    {
       logger.debug("Receive udpate singer {} request: {}", singer_id, req);
-      return null;
+      SingerVO singer = this.singerService.findSingerById(singer_id);
+      SingerDetail detail = new SingerDetail(null, null, req.getType(), req.getKeywords());
+      singer.merge(new SingerVO(detail));
+      singer = this.singerService.udpateSinger(singer);
+      return new UpdateSingerResp(singer.adaptor().toHttpModel());
    }
    
    @RequestMapping(value = "/{singer_id}",
@@ -52,6 +73,7 @@ public class SingerController {
                    produces = MediaType.APPLICATION_JSON_VALUE)
    public @ResponseBody DeleteSingerResp deleteSinger(@PathVariable("singer_id") String singer_id) {
       logger.debug("Receive delete singer {} request", singer_id);
+      this.singerService.deleteSinger(singer_id);
       return new DeleteSingerResp();
    }
    
@@ -61,7 +83,8 @@ public class SingerController {
                    produces = MediaType.APPLICATION_JSON_VALUE)
    public @ResponseBody GetSingerDetailResp getSingerDetail(@PathVariable("singer_id") String singer_id) {
       logger.debug("Receive get singer {} detail", singer_id);
-      return null;
+      SingerVO singer = this.singerService.findSingerById(singer_id);
+      return new GetSingerDetailResp(singer.adaptor().toHttpModel());
    }
    
    @RequestMapping(value = "/list",
@@ -73,7 +96,12 @@ public class SingerController {
                                                         @RequestParam("keyword") String keyword)
    {
       logger.debug("Receive get singer list request from {} get {}, type={}, keyword={}", index, size, type, keyword);
-      return null;
+      QueryListData<SingerVO> result = this.singerService.findSingers(index, size, type, keyword);
+      List<SingerDetail> list = new LinkedList<SingerDetail>();
+      for(SingerVO singer : result.getList()) {
+         list.add(singer.adaptor().toHttpModel());
+      }
+      return new GetSingerListResp(new QueryListData<SingerDetail>(result.getSize(), result.getTotalCount(), result.getStartIndex(), list));
    }
    
    // ---------------------------------------------------------------

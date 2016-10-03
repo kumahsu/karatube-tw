@@ -1,11 +1,10 @@
-package com.chomica.karatube.model.http.resp.data;
+package com.chomica.karatube.model;
 
 import java.util.List;
 
-import com.chomica.karatube.model.http.IHttpModel;
 import com.chomica.karatube.util.JsonUtil;
 
-public class QueryListData<T extends IHttpModel> {
+public class QueryListData<T> {
    // ---------------------------------------------------------------
    private int size;
    private int totalCount;
