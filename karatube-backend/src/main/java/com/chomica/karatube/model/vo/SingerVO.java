@@ -1,6 +1,9 @@
 package com.chomica.karatube.model.vo;
 
 import com.chomica.karatube.constant.SingerType;
+import com.chomica.karatube.constant.StatusCode;
+import com.chomica.karatube.exception.BadRequestFieldException;
+import com.chomica.karatube.exception.DebagaError;
 import com.chomica.karatube.exception.TypeNotFoundException;
 import com.chomica.karatube.model.entity.SingerEntity;
 import com.chomica.karatube.model.http.SingerDetail;
@@ -90,7 +93,7 @@ public class SingerVO implements IVoModel{
       this.keywords = MergeUtil.merge(this.keywords, target.getKeywords());
       if(update) {
          if(target.getLastUpdateTime() == null) {
-            //TODO: throw internal server error
+            throw new DebagaError("Update Singer but last update time is null");
          }
          this.lastUpdateTime = target.getLastUpdateTime();
       }
@@ -111,7 +114,7 @@ public class SingerVO implements IVoModel{
       try {
          this.type = SingerType.getType(type);
       } catch (TypeNotFoundException e) {
-         //TODO: throw invalid field exception
+         throw new BadRequestFieldException(StatusCode.INVALID_FIELD, "singer_type");
       }
    }
    private void setKeywords(String keywords) {

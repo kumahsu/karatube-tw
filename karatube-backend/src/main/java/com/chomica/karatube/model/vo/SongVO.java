@@ -2,6 +2,9 @@ package com.chomica.karatube.model.vo;
 
 import com.chomica.karatube.constant.ConfirmedType;
 import com.chomica.karatube.constant.SongCategory;
+import com.chomica.karatube.constant.StatusCode;
+import com.chomica.karatube.exception.BadRequestFieldException;
+import com.chomica.karatube.exception.DebagaError;
 import com.chomica.karatube.exception.TypeNotFoundException;
 import com.chomica.karatube.model.entity.SongEntity;
 import com.chomica.karatube.model.http.SongDetail;
@@ -106,7 +109,7 @@ public class SongVO implements IVoModel {
       this.confirmed = MergeUtil.merge(this.confirmed, target.getConfirmed());
       if(update) {
          if(target.getLastUpdateTime() == null) {
-            //TODO: throw internal server error
+            throw new DebagaError("Update Song but last update time is null");
          }
          this.lastUpdateTime = target.lastUpdateTime;
       }
@@ -127,7 +130,7 @@ public class SongVO implements IVoModel {
       try {
          this.category = SongCategory.getCategory(category);
       } catch (TypeNotFoundException e) {
-         //TODO: throw invalid field exception
+         throw new BadRequestFieldException(StatusCode.INVALID_FIELD, "song_category");
       }
    }
    private void setSinger(SingerVO singer) {
@@ -140,7 +143,7 @@ public class SongVO implements IVoModel {
       try {
          this.confirmed = ConfirmedType.getType(confirmed);
       } catch (TypeNotFoundException e) {
-         //TODO: throw invalid field exception
+         throw new BadRequestFieldException(StatusCode.INVALID_FIELD, "confirmed");
       }
    }
    private void setCreateTime(Long createTime) {

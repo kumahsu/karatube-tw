@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.chomica.karatube.constant.SingerType;
+import com.chomica.karatube.constant.StatusCode;
 import com.chomica.karatube.dao.ISingerDAO;
+import com.chomica.karatube.exception.BadRequestFieldException;
 import com.chomica.karatube.exception.TypeNotFoundException;
 import com.chomica.karatube.model.QueryListData;
 import com.chomica.karatube.model.entity.SingerEntity;
@@ -69,7 +71,7 @@ public class SingerService implements ISingerService {
       try {
          _type = SingerType.getType(type);
       } catch (TypeNotFoundException e) {
-         //TODO: throw invalid query exception
+         throw new BadRequestFieldException(StatusCode.INVALID_FIELD, "singer_type");
       }
       QueryListData<SingerEntity> result = this.singerDao.findSingersByCondition(start, size, _type, keyword);
       return this.adaptor(result);
