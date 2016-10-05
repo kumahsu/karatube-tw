@@ -9,6 +9,8 @@ public enum StatusCode {
    BAD_REQUEST(400000, "Invalid request format or value"),
    INVALID_JSON_FORMAT(400011, "Invalid request json format"),
    INVALID_CONTENT_TYPE(40021, "Invalid or missing Content-Type header"),
+   MISSING_FIELD(40030, "Bad request, missing field: "),
+   INVALID_FIELD(40031, "Bad request, invalid field: "),
    
    // ----- 500 Internal Server Error
    TYPE_NOT_FOUND(500400, "Type not found"),
