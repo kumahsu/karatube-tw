@@ -11,7 +11,6 @@ import com.chomica.karatube.constant.SingerType;
 import com.chomica.karatube.dao.ISingerDAO;
 import com.chomica.karatube.exception.TypeNotFoundException;
 import com.chomica.karatube.model.QueryListData;
-import com.chomica.karatube.model.entity.QueryListEntity;
 import com.chomica.karatube.model.entity.SingerEntity;
 import com.chomica.karatube.model.vo.SingerVO;
 import com.chomica.karatube.service.ISingerService;
@@ -48,7 +47,7 @@ public class SingerService implements ISingerService {
    }
    
    // ---------------------------------------------------------------
-   private QueryListData<SingerVO> adaptor(QueryListEntity<SingerEntity> result) {
+   private QueryListData<SingerVO> adaptor(QueryListData<SingerEntity> result) {
       List<SingerVO> list = new LinkedList<SingerVO>();
       for(SingerEntity entity : result.getList()) {
          list.add(new SingerVO(entity));
@@ -56,7 +55,7 @@ public class SingerService implements ISingerService {
       return new QueryListData<SingerVO>(result.getSize(), result.getTotalCount(), result.getStart(), list);
    }
    private QueryListData<SingerVO> findAllSingers(Integer start, Integer size) {
-      QueryListEntity<SingerEntity> result = this.singerDao.findAll(start, size);
+      QueryListData<SingerEntity> result = this.singerDao.findAll(start, size);
       return this.adaptor(result);
    }
    
@@ -72,7 +71,7 @@ public class SingerService implements ISingerService {
       } catch (TypeNotFoundException e) {
          //TODO: throw invalid query exception
       }
-      QueryListEntity<SingerEntity> result = this.singerDao.findSingersByCondition(start, size, _type, keyword);
+      QueryListData<SingerEntity> result = this.singerDao.findSingersByCondition(start, size, _type, keyword);
       return this.adaptor(result);
    }
 }

@@ -2,13 +2,13 @@ package com.chomica.karatube.dao;
 
 import java.util.List;
 
+import com.chomica.karatube.model.QueryListData;
 import com.chomica.karatube.model.entity.IEntity;
-import com.chomica.karatube.model.entity.QueryListEntity;
 
 public interface IBaseJpaDAO<T extends IEntity> {
    // ---------------------------------------------------------------
    public List<T> findAll();
-   public QueryListEntity<T> findAll(Integer start, Integer size);
+   public QueryListData<T> findAll(Integer start, Integer size);
    public T findById(Object id);
 
    // ---------------------------------------------------------------

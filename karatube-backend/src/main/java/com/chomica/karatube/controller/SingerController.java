@@ -101,15 +101,18 @@ public class SingerController {
       for(SingerVO singer : result.getList()) {
          list.add(singer.adaptor().toHttpModel());
       }
-      return new GetSingerListResp(new QueryListData<SingerDetail>(result.getSize(), result.getTotalCount(), result.getStartIndex(), list));
+      return new GetSingerListResp(new QueryListData<SingerDetail>(result.getSize(), result.getTotalCount(), result.getStart(), list));
    }
    
    // ---------------------------------------------------------------
    @RequestMapping(value = "/{singer_id}/songs",
                    method = RequestMethod.GET,
                    produces = MediaType.APPLICATION_JSON_VALUE)
-   public @ResponseBody GetSongListResp getSongsBySinger(@PathVariable("singer_id") String singer_id) {
-      logger.debug("Receive get songs by singer {} request", singer_id);
+   public @ResponseBody GetSongListResp getSongsBySinger(@RequestParam("index") Integer index,
+                                                         @RequestParam("size") Integer size,
+                                                         @PathVariable("singer_id") String singer_id) 
+   {
+      logger.debug("Receive get songs by singer {} request from {} get {}", singer_id, index, size);
       return null;
    }
 }

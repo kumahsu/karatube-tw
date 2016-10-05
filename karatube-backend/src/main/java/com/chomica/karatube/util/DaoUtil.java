@@ -9,6 +9,8 @@ import javax.persistence.TypedQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.chomica.karatube.model.QueryListData;
+
 public class DaoUtil {
     //---------------------------------------------------------------
     private static final Logger logger = LoggerFactory.getLogger(DaoUtil.class);
@@ -18,6 +20,18 @@ public class DaoUtil {
         for (String paramName : paramMap.keySet()) {
             query.setParameter(paramName, paramMap.get(paramName));
         }
+    }
+    
+    public static <T> QueryListData<T> getPagedResult(TypedQuery<T> query, 
+                                                        Integer start, 
+                                                        Integer size)
+    {
+       if(start != null) { query.setFirstResult(start); }
+       if(size != null) { query.setMaxResults(size); }
+       
+       int totalCount = query.getMaxResults();
+       List<T> result = query.getResultList();
+       return new QueryListData<T>(size, totalCount, start, result);
     }
     
     public static <T> T getSingleResult(TypedQuery<T> query) {

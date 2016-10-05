@@ -27,7 +27,7 @@ public class QueryListData<T> {
    public int getTotalCount() {
       return totalCount;
    }
-   public int getStartIndex() {
+   public int getStart() {
       return startIndex;
    }
    public List<T> getList() {

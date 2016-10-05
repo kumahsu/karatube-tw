@@ -1,15 +1,14 @@
 package com.chomica.karatube.dao.impl;
 
-import java.util.List;
-
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
 
 import com.chomica.karatube.constant.SingerType;
 import com.chomica.karatube.dao.ISingerDAO;
-import com.chomica.karatube.model.entity.QueryListEntity;
+import com.chomica.karatube.model.QueryListData;
 import com.chomica.karatube.model.entity.SingerEntity;
+import com.chomica.karatube.util.DaoUtil;
 import com.chomica.karatube.util.HQL;
 
 @Component("singerDao")
@@ -21,7 +20,7 @@ public class SingerDAO extends BaseJpaDAO<SingerEntity> implements ISingerDAO {
    
    // ---------------------------------------------------------------
    @Override
-   public QueryListEntity<SingerEntity> findSingersByCondition(Integer start, 
+   public QueryListData<SingerEntity> findSingersByCondition(Integer start, 
                                                                Integer size, 
                                                                SingerType type, 
                                                                String keywords) 
@@ -37,12 +36,6 @@ public class SingerDAO extends BaseJpaDAO<SingerEntity> implements ISingerDAO {
       }
       
       TypedQuery<SingerEntity> query = sql.toHql(super.em);
-      
-      if(start != null) { query.setFirstResult(start); }
-      if(size != null) { query.setMaxResults(size); }
-      
-      int totalCount = query.getMaxResults();
-      List<SingerEntity> result = query.getResultList();
-      return new QueryListEntity<SingerEntity>(size, totalCount, start, result);
+      return DaoUtil.getPagedResult(query, start, size);
    }
 }

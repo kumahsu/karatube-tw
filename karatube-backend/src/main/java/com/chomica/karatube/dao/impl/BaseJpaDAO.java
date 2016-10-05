@@ -9,8 +9,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.chomica.karatube.dao.IBaseJpaDAO;
+import com.chomica.karatube.model.QueryListData;
 import com.chomica.karatube.model.entity.IEntity;
-import com.chomica.karatube.model.entity.QueryListEntity;
 
 public class BaseJpaDAO<T extends IEntity> implements IBaseJpaDAO<T> {
    // ---------------------------------------------------------------
@@ -29,7 +29,7 @@ public class BaseJpaDAO<T extends IEntity> implements IBaseJpaDAO<T> {
    public List<T> findAll() {
       return this.findAll(null, null).getList();
    }
-   public QueryListEntity<T> findAll(Integer start, Integer size) {
+   public QueryListData<T> findAll(Integer start, Integer size) {
       CriteriaQuery<T> criteria = em.getCriteriaBuilder().createQuery(this.clazz);
       criteria.from(this.clazz);
       TypedQuery<T> query = em.createQuery(criteria);
@@ -41,7 +41,7 @@ public class BaseJpaDAO<T extends IEntity> implements IBaseJpaDAO<T> {
       }
       int totalCount = query.getMaxResults();
       List<T> result = query.getResultList();
-      return new QueryListEntity<T>(size, totalCount, start, result);
+      return new QueryListData<T>(size, totalCount, start, result);
    }
    public T findById(Object id) {
       return em.find(this.clazz, id);
