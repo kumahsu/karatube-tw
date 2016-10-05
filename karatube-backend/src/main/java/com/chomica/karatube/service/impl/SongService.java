@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.chomica.karatube.constant.ConfirmedType;
 import com.chomica.karatube.constant.SongCategory;
 import com.chomica.karatube.constant.StatusCode;
 import com.chomica.karatube.dao.ISongDAO;
@@ -31,6 +32,22 @@ public class SongService implements ISongService {
 
    @Override
    public SongVO updateSong(SongVO song) {
+      return new SongVO(this.songDao.save(song.adaptor().toEntity()));
+   }
+   
+   @Override
+   public SongVO confirmedSong(SongVO song, Integer confirmed) {
+      if(confirmed == null) {
+         throw new BadRequestFieldException(StatusCode.MISSING_FIELD, "confirmed");
+      }
+      ConfirmedType _confirmed = null;
+      try {
+         _confirmed = ConfirmedType.getType(confirmed);
+      } catch (TypeNotFoundException e) {
+         throw new BadRequestFieldException(StatusCode.INVALID_FIELD, "confirmed");
+      }
+      SongVO target = new SongVO(null, null, null, null, null, _confirmed, null, null);
+      song = song.merge(target);
       return new SongVO(this.songDao.save(song.adaptor().toEntity()));
    }
 
