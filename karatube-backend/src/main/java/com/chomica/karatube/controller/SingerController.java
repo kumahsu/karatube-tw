@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.chomica.karatube.model.QueryListData;
 import com.chomica.karatube.model.http.SingerDetail;
+import com.chomica.karatube.model.http.SongDetail;
 import com.chomica.karatube.model.http.req.CreateSingerReq;
 import com.chomica.karatube.model.http.req.UpdateSingerReq;
 import com.chomica.karatube.model.http.resp.CreateSingerResp;
@@ -27,7 +28,9 @@ import com.chomica.karatube.model.http.resp.GetSingerListResp;
 import com.chomica.karatube.model.http.resp.GetSongListResp;
 import com.chomica.karatube.model.http.resp.UpdateSingerResp;
 import com.chomica.karatube.model.vo.SingerVO;
+import com.chomica.karatube.model.vo.SongVO;
 import com.chomica.karatube.service.ISingerService;
+import com.chomica.karatube.service.ISongService;
 
 @Controller
 @RequestMapping(value = "/singer")
@@ -39,6 +42,10 @@ public class SingerController {
    @Autowired
    @Qualifier("singerService")
    private ISingerService singerService;
+   
+   @Autowired
+   @Qualifier("songService")
+   private ISongService songService;
    
    // ---------------------------------------------------------------
    @RequestMapping(value = "", 
@@ -113,6 +120,11 @@ public class SingerController {
                                                          @PathVariable("singer_id") String singer_id) 
    {
       logger.debug("Receive get songs by singer {} request from {} get {}", singer_id, index, size);
-      return null;
+      QueryListData<SongVO> result = this.songService.findSongsBySingerId(index, size, singer_id);
+      List<SongDetail> list = new LinkedList<SongDetail>();
+      for(SongVO song : result.getList()) {
+         list.add(song.adaptor().toHttpModel());
+      }
+      return new GetSongListResp(new QueryListData<SongDetail>(result.getSize(), result.getTotalCount(), result.getStart(), list));
    }
 }
