@@ -6,7 +6,7 @@ public enum KaratubeTopic {
    // ---------------------------------------------------------------
    SUCCESS("success"),
    INITIAL_ENV("init"),
-   PLAY("play"),
+   SKIP("skip"),
    RESTART("restart"),
    PLAY_PAUSE("play_pause"),
    ENABLE_ORIGIN("origin"),

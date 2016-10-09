@@ -140,15 +140,23 @@ public class ControlPanelController {
    
    // ---------------------------------------------------------------
    public @ResponseBody ControlCmdResp skip(@CookieValue("env") String envId) {
+      EnvironmentVO env = this.envService.getEnv(envId);
+      this.envService.skipSong(env);
       return new ControlCmdResp();
    }
    public @ResponseBody ControlCmdResp restart(@CookieValue("env") String envId) {
+      EnvironmentVO env = this.envService.getEnv(envId);
+      this.envService.restartSong(env);
       return new ControlCmdResp();
    }
    public @ResponseBody ControlCmdResp playPause(@CookieValue("env") String envId) {
+      EnvironmentVO env = this.envService.getEnv(envId);
+      this.envService.playPause(env);
       return new ControlCmdResp();
    }
    public @ResponseBody ControlCmdResp enableOrigin(@CookieValue("env") String envId) {
+      EnvironmentVO env = this.envService.getEnv(envId);
+      this.envService.enableOrigin(env);
       return new ControlCmdResp(); 
    }
 }
