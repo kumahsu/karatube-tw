@@ -117,11 +117,11 @@
 		<!-- <appender-ref ref="STDOUT" /> -->
 	</logger>
 
-<!-- 
-	<logger name="com" level="DEBUG">
+ 
+	<logger name="com.chomica.karatube" level="DEBUG">
 		<appender-ref ref="STDOUT" />
 	</logger>
--->
+
 
 	<root level="INFO">
 		<appender-ref ref="FILE_FIXED" />

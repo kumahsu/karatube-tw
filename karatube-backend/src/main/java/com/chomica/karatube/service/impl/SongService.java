@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import com.chomica.karatube.constant.ConfirmedType;
 import com.chomica.karatube.constant.SongCategory;
@@ -17,6 +18,7 @@ import com.chomica.karatube.model.entity.SongEntity;
 import com.chomica.karatube.model.vo.SongVO;
 import com.chomica.karatube.service.ISongService;
 
+@Component("songService")
 public class SongService implements ISongService {
    // ---------------------------------------------------------------
    @Autowired

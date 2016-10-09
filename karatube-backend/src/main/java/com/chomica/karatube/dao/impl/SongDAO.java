@@ -2,6 +2,8 @@ package com.chomica.karatube.dao.impl;
 
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Component;
+
 import com.chomica.karatube.constant.SongCategory;
 import com.chomica.karatube.dao.ISongDAO;
 import com.chomica.karatube.model.QueryListData;
@@ -9,6 +11,7 @@ import com.chomica.karatube.model.entity.SongEntity;
 import com.chomica.karatube.util.DaoUtil;
 import com.chomica.karatube.util.HQL;
 
+@Component("songDao")
 public class SongDAO extends BaseJpaDAO<SongEntity> implements ISongDAO {
    // ---------------------------------------------------------------
    public SongDAO() {
