@@ -1,13 +1,15 @@
-## Karatube API Document
+# Karatube.tw API Document
 
-### Service name [/karatube]
-
-+ [Common Service](common.md)
-	+ [Health Check](common.md#health-check-get-health)
-	+ [Echo Service](common.md#echo-service-post-echo)
-+ [Singer Service](singer.md)
-	+ [Create Singer](singer.md#create-singer-post-create)
-	+ [Update Singer](singer.md#update-singer-put-update)
-+ [Song Service](song.md)
-+ [Models](model.md)
-+ [Status Code](status.md)
+### Outline
++ [**Common Service**](common.md)
++ [**Control Panel**](control.md)
+	+ [Environment](control.md#environment)
+	+ [Playlist](control.md#playlist)
+	+ [Command](control.md#command)
++ [**Singer Management**](singer.md)
++ [**Song Management**](song.md)
++ [**Web Socket**](ws.md)
+	+ [Web Socket Models](ws.md#web-socket-models)
+	+ [Web Socket Methods](ws.md#web-socket-methods)
++ [**Models**](models.md)
++ [**Status Code**](status.md)
