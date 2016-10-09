@@ -38,8 +38,9 @@ public class GetNextSongProcessor implements IKaratubeSocketProcessor<String> {
       }
       EnvironmentVO env = this.envService.getEnv(envId);
       SongVO song = env.getPlaylist().pop();
-      KaratubeMsg<SongDetail> resp = new KaratubeMsg<SongDetail>(envId, KaratubeTopic.SUCCESS, song == null? null : song.adaptor().toHttpModel());
+      KaratubeMsg<SongDetail> resp = new KaratubeMsg<SongDetail>(envId, KaratubeTopic.NEXT_SONG, song == null? null : song.adaptor().toHttpModel());
       this.pushService.pushMessage(session, resp);
+      env.getHistory().push(song);
       if(song == null) {
          env.idle();
          KaratubeMsg<String> cmd = new KaratubeMsg<>(envId, KaratubeTopic.WAIT, null);

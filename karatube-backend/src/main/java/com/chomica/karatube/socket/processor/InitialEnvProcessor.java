@@ -32,7 +32,7 @@ public class InitialEnvProcessor implements IKaratubeSocketProcessor<String> {
       EnvironmentVO env = this.envService.createEnv(session);
       logger.debug("Environment created: {}", env);
       InitialEnvRespMsg data = new InitialEnvRespMsg(env.getId(), env.getPairCode());
-      KaratubeMsg<InitialEnvRespMsg> resp = new KaratubeMsg<InitialEnvRespMsg>(env.getId(), KaratubeTopic.SUCCESS, data);
+      KaratubeMsg<InitialEnvRespMsg> resp = new KaratubeMsg<InitialEnvRespMsg>(env.getId(), KaratubeTopic.INITIAL_ENV, data);
       logger.debug("Send Initial Env resposne: {}", resp);
       this.pushService.pushMessage(session, resp);
    }

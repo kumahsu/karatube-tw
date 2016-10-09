@@ -4,7 +4,6 @@ import com.chomica.karatube.exception.TypeNotFoundException;
 
 public enum KaratubeTopic {
    // ---------------------------------------------------------------
-   SUCCESS("success"),
    INITIAL_ENV("init"),
    SKIP("skip"),
    RESTART("restart"),

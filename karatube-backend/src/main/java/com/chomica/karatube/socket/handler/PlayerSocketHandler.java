@@ -32,7 +32,6 @@ public class PlayerSocketHandler extends TextWebSocketHandler {
    // ---------------------------------------------------------------
    private void dispatch(WebSocketSession session, String envId, KaratubeTopic topic, Object msg) {
       switch(topic) {
-      case SUCCESS: break;
       case INITIAL_ENV:
          if(msg != null || envId != null) {
             logger.warn("Receive Initial environment request, but msg or envId is not null");

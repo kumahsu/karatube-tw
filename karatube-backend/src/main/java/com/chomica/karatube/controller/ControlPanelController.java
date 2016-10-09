@@ -44,7 +44,7 @@ public class ControlPanelController {
 
    // ---------------------------------------------------------------
    @Autowired
-   @Qualifier("mockEnvService")
+   @Qualifier("envService")
    private IEnvService envService;
    
    @Autowired
@@ -139,21 +139,33 @@ public class ControlPanelController {
    }
    
    // ---------------------------------------------------------------
+   @RequestMapping(value = "/skip",
+                   method = RequestMethod.GET,
+                   produces = MediaType.APPLICATION_JSON_VALUE)
    public @ResponseBody ControlCmdResp skip(@CookieValue("env") String envId) {
       EnvironmentVO env = this.envService.getEnv(envId);
       this.envService.skipSong(env);
       return new ControlCmdResp();
    }
+   @RequestMapping(value = "/restart",
+                   method = RequestMethod.GET,
+                   produces = MediaType.APPLICATION_JSON_VALUE)
    public @ResponseBody ControlCmdResp restart(@CookieValue("env") String envId) {
       EnvironmentVO env = this.envService.getEnv(envId);
       this.envService.restartSong(env);
       return new ControlCmdResp();
    }
+   @RequestMapping(value = "/play_pause",
+                   method = RequestMethod.GET,
+                   produces = MediaType.APPLICATION_JSON_VALUE)
    public @ResponseBody ControlCmdResp playPause(@CookieValue("env") String envId) {
       EnvironmentVO env = this.envService.getEnv(envId);
       this.envService.playPause(env);
       return new ControlCmdResp();
    }
+   @RequestMapping(value = "/enable_origin",
+                   method = RequestMethod.GET,
+                   produces = MediaType.APPLICATION_JSON_VALUE)
    public @ResponseBody ControlCmdResp enableOrigin(@CookieValue("env") String envId) {
       EnvironmentVO env = this.envService.getEnv(envId);
       this.envService.enableOrigin(env);
